@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <mat-toolbar-row class="justify-content-between">
+        <button mat-icon-button (click)="togglesidebar()"><mat-icon>menu</mat-icon></button>
+        <div class="row mr-2 ml-auto">
+            <mat-toolbar >
+                
+                <span class="nav-tool-items">
+                    <a mat-button [routerLink]="['login']" *ngIf="!(LoginStatus$ | async) as LoginStatus" routerLinkActive="active">Log in</a>
+                    <a mat-button [routerLink]="['Guied']" *ngIf="(LoginStatus$ | async) as LoginStatus" routerLinkActive="active">User Guides</a>
+                  <button mat-button [matMenuTriggerFor]="menu"
+                        class="user ">
+                        <span class="material-icons md-48">face</span>
+                        <span id="username" *ngIf="(Username$ | async) as Username">{{Username}}</span>
+                        <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" >
+                        <button mat-menu-item *ngIf="(Username$ | async) as Username" (click)="LogOut()">
+                            <mat-icon>exit_to_app</mat-icon>
+                            Logout
+                        </button>
+                    </mat-menu>
+                </span>
+              </mat-toolbar>
+            
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

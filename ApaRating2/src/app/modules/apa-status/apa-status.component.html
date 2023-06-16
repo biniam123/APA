@@ -1,0 +1,103 @@
+<div class="container">
+
+
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Summary Report</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="mat-elevation-z8">
+            <form [formGroup]="search" (ngSubmit)="SaveApaStatus()" class="example-form">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Location/Branch:</mat-label>
+                            <mat-select matNativeControl required formControlName="Location">
+                                <mat-option  *ngFor="let data of locations"  [value]="data.Id">{{data.Location}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Department:</mat-label>
+                            <mat-select  matNativeControl required formControlName="Department" (selectionChange)="PopulateDivision()">
+                                <mat-option  *ngFor="let data of department" [value]="data.Id">{{data.Department}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Division:</mat-label>
+                            <mat-select matNativeControl required formControlName="Division">
+                                <mat-option *ngFor="let data of divisions" [value]="data.Id">{{data.Division}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Expected:</mat-label>
+                            <input matInput  required formControlName="Expected" placeholder="Expected">
+                            <mat-error>required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+                <button style="margin-top: 5px;background-color: #ffc221;" mat-raised-button type="submit"
+                    class="btn btn-success"><mat-icon>add</mat-icon>Save</button>
+                
+            </form>
+            
+            
+        </div>
+        <div class="mat-elevation-z8">
+            <mat-form-field class="filter col-md-4" appearance="fill">
+                <input matInput placeholder="filter" autocomplete="off" (keyup)="filterData($event)" /> 
+            </mat-form-field>
+            <div class="table-responsive">
+            <table mat-table [dataSource]="apadata" class="table table-responsive">
+                <ng-container matColumnDef="No">
+                    <th mat-header-cell *matHeaderCellDef><Span>No</Span></th>
+                    <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">   </span>  </td>
+                </ng-container>
+                <ng-container matColumnDef="Location">
+                    <th mat-header-cell *matHeaderCellDef>Location</th>
+                    <td mat-cell *matCellDef="let element">{{element.Location}}<span style="padding-left: 20px;">   </span></td>
+                </ng-container>
+                <ng-container matColumnDef="Department">
+                    <th mat-header-cell *matHeaderCellDef>Department</th>
+                    <td mat-cell *matCellDef="let element">{{element.Department}}<span style="padding-left: 20px;">   </span></td>
+                </ng-container>
+                <ng-container matColumnDef="Division">
+                    <th mat-header-cell *matHeaderCellDef>Division</th>
+                    <td mat-cell *matCellDef="let element">{{element.Division}}<span style="padding-left: 20px;">   </span></td>
+                </ng-container>
+                <ng-container matColumnDef="Expected">
+                    <th mat-header-cell *matHeaderCellDef>Expected</th>
+                    <td mat-cell *matCellDef="let element">{{element.Expected}}<span style="padding-left: 20px;">   </span></td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                
+                    <td mat-cell *matCellDef="let element">
+                        <i (click)="Delete(element.Id)">
+                            <mat-icon >delete_forever</mat-icon>
+                        </i>
+                    </td>
+                    
+                </ng-container>
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <i  (click)="Update(element.Id)">
+                            <mat-icon>edit</mat-icon>
+                        </i>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

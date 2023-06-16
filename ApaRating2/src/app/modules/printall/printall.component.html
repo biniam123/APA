@@ -1,0 +1,201 @@
+<div class="row" style="float: right;">
+    <i (click)="DownLoad()">
+        <mat-icon matTooltip="Download">get_app</mat-icon>
+    </i>
+    <i (click)="onClose()">
+        <mat-icon matTooltip="Close">clear</mat-icon>
+    </i>
+</div>
+
+<div id="content" #content>
+    <div class="body" style="margin-top: 30px;">
+        <div style="background-color: #b9bfbf ;">
+            <div class="row">
+                <span>EMPLOYEE'S INFORMATION</span>
+            </div>
+        </div>
+
+        <div >
+            <div class="row">
+                <div class="rLeft1">Employee Full Name:</div>
+                <div class="rCenter">Job Title:</div>
+                <div class="rRight1">Performance period: (from-to):</div>
+            </div>
+            <div class="row">
+                <div class="rLeft1"><u>{{Name}}</u></div>
+                <div class="rCenter"><u>{{Job}}</u></div>
+                <div class="rRight1"><u>{{Period}}</u></div>
+            </div>
+            <div class="row">
+                <div class="rLeft1">Immediate Supervisor Name:</div>
+                <div class="rCenter">Immediate Supervisor Job Title:</div>
+
+            </div>
+            <div class="row">
+                <div class="rLeft1"><u>{{ImmediateSupName}}</u></div>
+                <div class="rCenter"><u>{{ImmediateSupTitle}}</u></div>
+            </div>
+            <div class="row">
+                <div class="rLeft1">Location/Branch:</div>
+                <div class="rCenter">Department:</div>
+                <div class="rRight1">Division:</div>
+            </div>
+            <div class="row">
+                <div class="rLeft1"><u>{{Location}}</u></div>
+                <div class="rCenter"><u>{{Department}}</u></div>
+                <div class="rRight1"><u>{{Division}}</u></div>
+            </div>
+        
+        <div  style="background-color: #b9bfbf ;">
+            <div class="row">
+                <span>SECTION 2A: SUPERVISOR EVALUATION ON PERFORMANCE OBJECTIVES: - </span><br />
+                <span> Exceptional (EXP) =4; Fully Successful (FS) =3; Partially successful (PS) =2; and Underperforming
+                    (UP) =1 point.
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div >
+                <table class="table "  >
+                    <tr>
+                        <th style="background-color: white; color:black">Objective</th>
+                        <th style="background-color: white; color:black;" >Rating</th>
+                        
+                    </tr>
+                    <tr *ngFor="let element of objectiveData" >
+                        <td style="margin-left: 5px;">{{element.Objective}}</td>
+                        <td >{{element.Code}}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            
+        </div>
+        
+        <div *ngIf="!(isSupervisor)" >
+            <div  style="background-color: #b9bfbf ;">
+                <div class="row">
+                    <span>SECTION 3: EVALUATION ON TECHNICAL COMPETENCIES </span><br />
+
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th style="background-color: white; color:black">Competency</th>
+                            <th style="background-color: white; color:black;margin-left: 20px;" >Rating</th>
+                            
+                        </tr>
+                        <tr *ngFor="let element of noncompetencyData">
+                            <td style="margin-left: 5px;">{{element.CompetencyName}}</td>
+                            <td >{{element.Code}}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <div *ngIf="(isSupervisor)" >
+            <div style="background-color: #b9bfbf ;">
+                <div class="row">
+                    <span>SECTION 3: EVALUATION ON LEADERSHIP and MANAGEMENT COMPETENCIES </span><br />
+
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th style="background-color: white; color:black">Competency</th>
+                            <th style="background-color: white; color:black;" >Rating</th>
+                            
+                        </tr>
+                        <tr *ngFor="let element of supercompetencyData">
+                            <td style="margin-left: 40px;">{{element.CompetencyName}}</td>
+                            <td style="margin-left: 40px;">{{element.Code}}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                    
+            </div>
+            
+        </div>
+        <div>
+            <div style="background-color: #b9bfbf ;">
+                <div class="row">
+                    <span class="pull-left">SECTION 4: EVALUATION ON ECX CORE VALUES (Highest EXP=4 points to lowest
+                        UNP=1point) (Refer Annex 4) </span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th style="background-color: white; color:black">Core Value</th>
+                            <th style="background-color: white; color:black;" >Selfe Evaluation</th>
+                            <th style="background-color: white; color:black;">Supervisor Rating</th>
+                        </tr>
+                        <tr *ngFor="let element of coreData">
+                            <td >{{element.CoreValue}}</td>
+                            <td >{{element.SelfEvaluation}}</td>
+                            <td >{{element.Code}}</td>
+                        </tr>
+                    </table>
+                </div>
+                    
+                  
+                
+            </div>
+        </div>
+        <div>
+            <div style="background-color: #b9bfbf ;">
+                <div class="row">
+                    <span class="col-md-4">Your Comment</span>
+                    <span class="col-md-4">1st Line Supervisor’s Comment</span>
+                    <span class="col-md-4">2nd Line Supervisor Comment </span>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <span class="col-md-4">{{EmployeeComment}}</span>
+                    <span class="col-md-4"> {{FirstLineComment}}</span>
+                    <span class="col-md-4"> {{SecondLineComment}} </span>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #b9bfbf ;">
+            <div class="row">
+                <span class="pull-left">Supervisor's</span>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div >
+                <span>First Line Supervisor: {{ImmediateSupName}}</span>
+            </div>
+            <div >
+                <span>Second Line Supervisor: {{SecondSupervisorName}}</span>
+            </div>
+        </div>
+        <div  style="background-color: #b9bfbf ;">
+            <div class="row">
+                <span class="pull-left">SECTION 7: Ratings</span>
+            </div>
+        </div>
+        <div >
+            <div class="row">
+                <span class="col-md-3">First Line Rating: <span style="color: red;">{{FirstLevelRate}}</span>
+                </span>
+                <span class="col-md-3">Second Line Rating: <span style="color: red;">{{SecondLevelRate}}</span>
+                </span>
+                <span class="col-md-3">Third Line Rating: <span style="color: red;">{{ThirdLevelRate}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

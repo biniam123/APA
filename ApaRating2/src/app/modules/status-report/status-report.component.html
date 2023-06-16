@@ -1,0 +1,99 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Status Report</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="mat-elevation-z8">
+            <form [formGroup]="search" class="example-form">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Location/Branch:</mat-label>
+                            <mat-select matNativeControl formControlName="Location"
+                                (selectionChange)="PopulateByLocation()">
+                                <mat-option *ngFor="let data of locations" [value]="data.Id">{{data.Location}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Department:</mat-label>
+                            <mat-select matNativeControl formControlName="Department"
+                                (selectionChange)="PopulateDivision()">
+                                <mat-option *ngFor="let data of department" [value]="data.Id">{{data.Department}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Division:</mat-label>
+                            <mat-select matNativeControl formControlName="Division"
+                                (selectionChange)="PopulateByDivision()">
+                                <mat-option *ngFor="let data of divisions" [value]="data.Id">{{data.Division}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="mat-elevation-z8">
+            <div class="card">
+                <div class="card-header clearfix">
+                    <span class="pull-left">Status Report</span>
+                    <div class="pull-right">
+                        <button class="btn btn-success btn-sm">
+                            <i (click)="exportToExcel()">Export to Excel</i> </button>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <mat-form-field class="filter col-md-4" appearance="fill">
+                        <input matInput placeholder="filter" autocomplete="off" (keyup)="filterData($event)" /> 
+                    </mat-form-field>
+                    <div class="table-responsive">
+                        
+                        <table mat-table [dataSource]="apadata" class="table table-bordered">
+                            <ng-container matColumnDef="No" style="text-align: center;">
+                                <th mat-header-cell  *matHeaderCellDef><Span>No</Span></th>
+                                <td  class="cell" mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span
+                                        > </span> </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Location" style="text-align: center;">
+                                <th mat-header-cell  *matHeaderCellDef>Location</th>
+                                <td class="cell" mat-cell *matCellDef="let element">{{element.Location}}<span
+                                        > </span></td>
+                            </ng-container>
+                            <ng-container matColumnDef="Department" style="text-align: center;">
+                                <th mat-header-cell *matHeaderCellDef>Department</th>
+                                <td class="cell" mat-cell *matCellDef="let element">{{element.Department}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Division" style="text-align: center;">
+                                <th mat-header-cell  *matHeaderCellDef>Division</th>
+                                <td class="cell" mat-cell *matCellDef="let element">{{element.Division}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Expected" style="text-align: center;">
+                                <th mat-header-cell  *matHeaderCellDef>Expected</th>
+                                <td class="cell" mat-cell *matCellDef="let element">{{element.Expected}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Actual" style="text-align: center;">
+                                <th mat-header-cell  *matHeaderCellDef>Actual</th>
+                                <td class="cell" mat-cell *matCellDef="let element">{{element.Actual}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

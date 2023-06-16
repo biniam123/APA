@@ -1,0 +1,75 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">View Employee Annual Plan</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="mat-elevation-z8">
+            <div class="card">
+                <div class="card-header clearfix">
+                    <span class="pull-left" style="color:#6CC417">{{Name}}</span>
+                    
+                    <div class="pull-right">
+                        <button class="btn btn-success btn-sm">
+                            <i (click)="exportToExcel()">Export to Excel</i> </button>
+                            <button class="btn btn-danger btn-sm">
+                                <i (click)="Approve()">Approve</i> </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table mat-table [dataSource]="plandata" class="table table-bordered">
+                            <ng-container matColumnDef="No" style="text-align: center;">
+                                <th  mat-header-cell *matHeaderCellDef>No</th>
+                                <td class="cell" mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Perspective">
+                                <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Perspective</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.Perspective}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="CorporateObjective">
+                                <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Corporate Objective</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.CorporateObjective}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="WorkUnitObjective">
+                                <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Work Unit Objective</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.WorkUnitObjective}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="IndividualObjectives">
+                                <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Individual performance Objectives (KRAs)</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.IndividualObjective}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Weight">
+                                <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Weight (%)</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.Weight}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Measurement">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;">Measurement (KPIs)</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.Measurement}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="EXP">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> EXP</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.EXP}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="FS">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;">  FS (target)</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.FS}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="PS">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> PS</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.PS}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="UP">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> UP</th>
+                                <td class="cell" mat-cell *matCellDef="let element" >{{element.UP}}</td>
+                            </ng-container>
+                            
+                            
+                            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

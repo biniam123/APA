@@ -1,0 +1,63 @@
+<div class="row">
+    <button class="btn btn-danger" (click)="Download()">Download<mat-icon matTooltip="Download">get_app</mat-icon></button>
+</div>
+<div id="content" style="margin-top: 50px;" #content>
+
+
+    <div class="row" style="text-align: center;">
+        <span >For Employees that are Rated Exceptional</span>
+
+    </div>
+
+
+    <div class="row">
+        <div class="pull-left">Employee Full Name: <u>{{Name}}</u></div>
+        <div class="pull-right">Job Title: <u>{{Job}}</u></div>
+        
+    </div>
+    
+    <div class="row">
+        <div class="pull-left">Performance period: <u>{{performanceperiod}}</u></div>
+    </div>
+    <div class="row">
+        <div class="pull-left">Immediate Supervisor Name: <u>{{ImmediateSupName}}</u></div>
+        <div class="pull-right">Immediate Supervisor Job Title: <u>{{ImmediateSupTitle}}</u></div>
+        
+    </div>
+    
+    <div class="row">
+        <div class="pull-left">Location/Branch: <u>{{Location}}</u></div>
+        <div class="pull-left">Department: <u>{{Department}}</u></div>
+        <div class="pull-left">Division: <u>{{Division}}</u></div>
+    </div>
+    
+    <div class="body">
+        <div class="row">
+            <ol>
+                <li>
+                    <span>Exceptional Performance across all objectives</span>
+                    <br />
+                    <p>Specify those objectives that the employee demonstrates exceptional performance:</p>
+                    <ol>
+                        <li *ngFor="let data of objectiveData">{{data.Objective}}</li>
+                    </ol>
+                </li>
+                <li>
+                    <span>How they have met the criteria for an Exceptional/Outstanding rating? </span>
+                    <br />
+                    <p>(please note, short bullet point notes and examples are advised for this section)</p><ol>
+                        <li>Demonstration of the Exchange’s Core Values:<br /> {{core}}</li>
+                        <li>Dedication and commitment:<br /> {{Dedication}}</li>
+                        <li>Adherence to rules and regulations:<br /> {{Adherence}}</li>
+                        <li>Shouldering Additional responsibilities:<br /> {{Shouldering}}</li>
+                        <li>Interpersonal skills and behaviour:<br /> {{Skill}}</li>
+                        <li>Innovative practices/process/system introduced:<br /> {{Innovative}} </li>
+                        <li>Efforts made to share & transfer knowledge:<br /> {{Share}}</li>
+                    </ol>
+                </li>
+
+            </ol>
+        </div>
+    </div>
+
+</div>

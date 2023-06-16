@@ -1,0 +1,45 @@
+<mat-nav-list>
+    <div class="logo py-4">
+        <img src="../../../assets/ECXLogo.png" alt="company logo" />
+    </div>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="./dashboard" routerLinkActive="list-item-active">
+        <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    
+    <a mat-list-item routerLink="./search" routerLinkActive="list-item-active">
+        <mat-icon>search</mat-icon>Record APA
+    </a>
+    <a mat-list-item routerLink="./plan" routerLinkActive="list-item-active">
+        <mat-icon>search</mat-icon>Record Annual Plan
+    </a>
+    <a mat-list-item routerLink="./myapa" routerLinkActive="list-item-active">
+        <mat-icon>search</mat-icon> View My APA
+    </a>
+    
+    <a mat-list-item routerLink="./reviewapa" routerLinkActive="list-item-active" *ngIf="(FirstLine$ | async) as FirstLine">
+        <mat-icon>search</mat-icon>First Line Review APA
+    </a>
+    <a mat-list-item routerLink="./supervisory" routerLinkActive="list-item-active" *ngIf="(SecondLine$ | async) as sl">
+        <mat-icon>search</mat-icon>Second Line Review APA
+    </a>
+    
+    <a mat-list-item routerLink="./summary" routerLinkActive="list-item-active" *ngIf="(HR$ | async) as hr">
+        <mat-icon>bar_chart</mat-icon> Summary
+    </a>
+    <a mat-list-item routerLink="./status" routerLinkActive="list-item-active" *ngIf="(HR$ | async) as hr">
+        <mat-icon>bar_chart</mat-icon> Status
+    </a>
+    <a mat-list-item routerLink="./detail" routerLinkActive="list-item-active" *ngIf="(HR$ | async) as hr">
+        <mat-icon>bar_chart</mat-icon> Detail APA View
+    </a>
+    <a mat-list-item routerLink="./single" routerLinkActive="list-item-active" *ngIf="(HR$ | async) as hr">
+        <mat-icon>bar_chart</mat-icon> Single Page APA 
+    </a>
+    <a mat-list-item routerLink="./apaStatus" routerLinkActive="list-item-active" *ngIf="(HR$ | async) as hr">
+        <mat-icon>bar_chart</mat-icon> Expected APA 
+    </a>
+    <a mat-list-item routerLink="./viewPlan" routerLinkActive="list-item-active" *ngIf="(HR$ | async) as hr">
+        <mat-icon>bar_chart</mat-icon> View Annual Plan 
+    </a>
+</mat-nav-list>

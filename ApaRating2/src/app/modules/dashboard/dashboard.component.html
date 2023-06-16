@@ -1,0 +1,32 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Dashboard</div>
+    <div class="page_content shadow p-3 position-relative">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div >
+                    <canvas id="canva">
+                        {{chart2}}
+                    </canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="content center" >
+                    <canvas id="canvas" width="800" height="800">
+                        {{chart}}
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h4>Annual Plan Performance</h4>
+            <div class="col-md-6">
+                <canvas id="plan">
+                    {{chart3}}
+                </canvas>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

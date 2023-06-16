@@ -1,0 +1,57 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Edit Objective/Task</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="mat-elevation-z8">
+            <span>Section 2: PERFORMANCE OBJECTIVES AND KEY DELIVERABLES/TASKS</span>
+            
+                    <form [formGroup]="addObjective" class="example-form" (ngSubmit)="SaveObjective()">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Objective/Task:</mat-label>
+                            <textarea matInput required placeholder="Insert Objective"
+                                formControlName="ObjectiveName"></textarea>
+
+                            <mat-error>Objective required</mat-error>
+                        </mat-form-field>
+
+                        <button style="margin-top: 5px;background-color: #73a534;" mat-raised-button type="submit"
+                            class="btn btn-success">
+                            <mat-icon>add</mat-icon>Objective/Task
+                        </button>
+                    </form>
+                
+                    <table mat-table [dataSource]="objectiveData">
+                        <ng-container matColumnDef="No">
+                            <th mat-header-cell *matHeaderCellDef><Span>No</Span></th>
+                            <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span
+                                    style="padding-left: 20px;"> </span> </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Objective">
+                            <th mat-header-cell *matHeaderCellDef>Objective</th>
+                            <td mat-cell style="width: 70%;" *matCellDef="let element">{{element.Objective}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell *matHeaderCellDef></th>
+
+                            <td mat-cell *matCellDef="let element">
+                                <i (click)="Delete(element.Id)" >
+                                    <mat-icon matTooltip="Delete">delete_forever</mat-icon>
+                                </i>
+                            </td>
+
+                        </ng-container>
+                        <ng-container matColumnDef="edit">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <i (click)="Update(element.Id)" >
+                                    <mat-icon matTooltip="Delete">edit</mat-icon>
+                                </i>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                
+        </div>
+    </div>
+</div>

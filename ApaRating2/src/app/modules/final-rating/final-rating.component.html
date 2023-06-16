@@ -1,0 +1,355 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Review Employee APA</div>
+    <div class="page_content shadow p-3 position-relative">
+
+        <div class="mat-elevation-z8">
+            <div class="card">
+                <div class="card-header">
+                    <span class="pull-left">Employee List</span>
+                </div>
+                <div class="card-body">
+                    <table mat-table [dataSource]="employeeList">
+                        <ng-container matColumnDef="No">
+                            <th mat-header-cell *matHeaderCellDef>No</th>
+                            <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                </span></td>
+                        </ng-container>
+                        <ng-container matColumnDef="Name">
+                            <th mat-header-cell *matHeaderCellDef>Name<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element">{{element.EmployeeName}}<span
+                                    style="padding-left: 20px;"></span></td>
+                        </ng-container>
+                        <ng-container matColumnDef="Status">
+                            <th mat-header-cell *matHeaderCellDef>APA Status<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element">{{element.Status}}<span
+                                    style="padding-left: 20px;"></span></td>
+                        </ng-container>
+                        
+                        <ng-container style="width: 100px;" matColumnDef="first">
+                            <th mat-header-cell *matHeaderCellDef>First Rating<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element" style="padding-left: 30px;">{{element.FirstLevelRate}}<span
+                                style="padding-left: 20px;"></span></td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="second">
+                            <th mat-header-cell *matHeaderCellDef>Second Rating<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element" style="padding-left: 30px;">{{element.SecondLevelRate}}<span
+                                style="padding-left: 20px;"></span></td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="third">
+                            <th mat-header-cell *matHeaderCellDef>Third Rating<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element" style="padding-left: 30px;">{{element.ThirdLevelRate}}<span
+                                style="padding-left: 20px;"></span></td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="exception">
+                            <th mat-header-cell *matHeaderCellDef>Objective<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element" style="padding-left: 30px;">
+                                <a *ngIf="(element.SecondLevelRate==4)" routerLink="../viewException/{{element.EmployeeId}}">
+                                        
+                                    <mat-icon matTooltip="Exceptional Objective">done_outline</mat-icon>
+                                
+                            </a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container style="width: 100px;" matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <i (click)="PopulateObjective(element.EmployeeId,element.EmployeeName)">
+                                    <mat-icon matTooltip="Select">touch_app</mat-icon>
+                                </i>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+                
+            </div>
+
+        </div>
+        <div class="mat-elevation-z8">
+
+            <span style="color: #6CC417; font-weight: bold; text-align: center;">{{Name}}</span>
+
+            <div class="mat-elevation-z8">
+                <div class="card">
+                    <div class="card-header clearfix">
+                        <span class="pull-left">SECTION 2: PERFORMANCE OBJECTIVES AND KEY DELIVERABLES/TASKS </span>
+                        <span class="pull-right">{{objective}}</span>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <form (ngSubmit)="SaveRating()">
+                                <table mat-table [dataSource]="objectiveData" >
+                                    <ng-container matColumnDef="No">
+                                        <th mat-header-cell *matHeaderCellDef>No</th>
+                                        <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span
+                                                style="padding-left: 20px;">
+                                            </span></td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Objective">
+                                        <th mat-header-cell *matHeaderCellDef>Objective <span
+                                                style="padding-left: 20px;"></span>
+                                        </th>
+                                        <td mat-cell style="width: 70%;" *matCellDef="let element">
+                                            {{element.Objective}}<span style="padding-left: 20px;"> </span></td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Rating">
+                                        <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;">
+                                            </span>SUPERVISOR EVALUATIONS
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <mat-radio-group aria-label="Select Rating">
+                                                <mat-radio-button *ngFor="let data of ratings" [matTooltip]="data.Rating" [value]="data.Id"
+                                                    [checked]="(data.Code==element.Code)"
+                                                    (click)="GetValue(data.Id,element.Id)">
+                                                    {{data.Code}}
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayObjective"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayObjective;"></tr>
+
+                                </table>
+
+                                <button style="margin-top: 5px;background-color: #73a534;" mat-raised-button
+                                    type="submit" class="btn btn-success">
+                                    <mat-icon>edit</mat-icon> Edit Evaluation
+                                </button>
+                                
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8" *ngIf="!(isSupervisor)">
+                <div class="card">
+                    <div class="card-header clearfix">
+                        <span class="pull-left">SECTION 3: EVALUATION ON TECHNICAL COMPETENCIES</span>
+                        <span class="pull-right">{{nonsupervisory}}</span>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+                            <form (ngSubmit)="addNonCompetency()">
+                                <table mat-table [dataSource]="noncompetencyData" >
+                                    <ng-container matColumnDef="No">
+                                        <th mat-header-cell *matHeaderCellDef>No</th>
+                                        <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span
+                                                style="padding-left: 20px;">
+                                            </span></td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Competency">
+                                        <th mat-header-cell *matHeaderCellDef>COMPETENCY</th>
+                                        <td mat-cell *matCellDef="let element">{{element.CompetencyName}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Rating">
+                                        <th mat-header-cell *matHeaderCellDef>EVALUATION</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <mat-radio-group aria-label="Select Rating">
+                                                <mat-radio-button *ngFor="let data of ratings" [matTooltip]="data.Rating" [value]="data.Id"
+                                                    [checked]="(data.Code==element.Code)"
+                                                    (click)="GetNonValue(data.Id,element.Id)">
+                                                    {{data.Code}}
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedNonColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedNonColumns;"></tr>
+                                </table>
+
+                                <button style="margin-top: 5px; background-color: #73a534;" mat-raised-button
+                                    type="submit" class="btn btn-success">
+                                    <mat-icon>edit</mat-icon> Edit Competency
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8" *ngIf="(isSupervisor)">
+                <div class="card">
+                    <div class="card-header clearfix">
+                        <span class="pull-left">SECTION 3: EVALUATION ON LEADERSHIP and MANAGEMENT COMPETENCIES</span>
+                        <span class="pull-right">{{supervisory}}</span>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+                            <form (ngSubmit)="addSuperCompetency()">
+                                <table mat-table [dataSource]="supercompetencyData" >
+                                    <ng-container matColumnDef="No">
+                                        <th mat-header-cell *matHeaderCellDef>No</th>
+                                        <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span
+                                                style="padding-left: 20px;">
+                                            </span></td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Competency">
+                                        <th mat-header-cell *matHeaderCellDef>COMPETENCY</th>
+                                        <td mat-cell *matCellDef="let element">{{element.CompetencyName}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Rating">
+                                        <th mat-header-cell *matHeaderCellDef>EVALUATION</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <mat-radio-group aria-label="Select Rating">
+                                                <mat-radio-button *ngFor="let data of ratings" [matTooltip]="data.Rating" [value]="data.Id"
+                                                    [checked]="(data.Code==element.Code)"
+                                                    (click)="GetSuperValue(data.Id,element.Id)">
+                                                    {{data.Code}}
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedSuperColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedSuperColumns;"></tr>
+                                </table>
+
+                                <button style="margin-top: 5px;background-color: #73a534;" mat-raised-button
+                                    type="submit" class="btn btn-success">
+                                    <mat-icon>edit</mat-icon>Edit Competency
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8">
+                <div class="card">
+                    <div class="card-header clearfix">
+                        <span class="pull-left">SECTION 4: EVALUATION ON ECX CORE VALUES (lowest UP=1point to Highest
+                            EXP=4 points)</span>
+                        <span class="pull-right">{{core}}</span>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+                            <form #f="ngForm" (ngSubmit)="SaveEmpRating()">
+                                <table mat-table [dataSource]="coreData" >
+                                    <ng-container matColumnDef="No">
+                                        <th mat-header-cell *matHeaderCellDef>No</th>
+                                        <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span
+                                                style="padding-left: 20px;">
+                                            </span></td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Core">
+                                        <th mat-header-cell *matHeaderCellDef>CORE VALUES</th>
+                                        <td mat-cell *matCellDef="let element">{{element.CoreValue}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Self-Rating">
+                                        <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;">
+                                            </span>SELF
+                                            EVALUATION</th>
+                                        <td mat-cell style="text-align: center;" *matCellDef="let element">
+                                            {{element.SelfEvaluation}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Rating">
+                                        <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;">
+                                            </span>SUPERVISOR
+                                            EVALUATION</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <mat-radio-group aria-label="Select Rating">
+                                                <mat-radio-button *ngFor="let data of ratings" [matTooltip]="data.Rating" [value]="data.Id"
+                                                    [checked]="(data.Code==element.Code)"
+                                                    (click)="GetCoreValue(data.Id,element.Id)">
+                                                    {{data.Code}}
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayCore"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayCore;"></tr>
+                                </table>
+
+                                <button style="margin-top: 5px;background-color: #73a534;" mat-raised-button
+                                    type="submit" class="btn btn-success">
+                                    <mat-icon>edit</mat-icon> Edit Core
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <span class="col-md-4">Employee Comment(Please state your major accomplishment during the performance period )</span>
+                            <span class="col-md-4">1st Supervisor’s Comment</span>
+                            <span class="col-md-4">2st Supervisor’s Comment</span>
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row" style="margin-top: 20px; font-size: 20px; font-weight: bold;">
+                            <div class="col-md-4">
+                                <span style="color:#7d7575">{{EmployeeComment}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span style="color:#7d7575">{{FirstLineComment}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span style="color:#7d7575">{{SecondLineComment}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="mat-elevation-z8">
+                <div class="card">
+                    <div class="card-header">
+                        <span>SECTION 6: Final Rating</span>
+                    </div>
+                    <div class="card">
+                        <div class="row">
+                    
+                            <div class="col-md-3">
+                                <br/>
+                                <span>First Line Rate: <span style="color:red">{{initialRate}}</span> </span><br/>
+                                <br/>
+                                <span>Second Line Rate: <span style="color:red">{{SecondRate}}</span></span><br/>
+                                <br/>
+                                <span>Your Rating: <span style="color:red">{{Rate}}</span></span>
+                            </div>
+                            <div class="col-md-3">
+                                <form [formGroup]="Rating" (ngSubmit)="AppoveRating()" class="example-form">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Final Rating:</mat-label>
+                                        <input matInput placeholder="Final Rating" formControlName="FinalRate"
+                                            required>
+                                    </mat-form-field>
+                                    <button style="margin-top: 5px;background-color: #ffc221;" type="submit" mat-raised-button
+                                        class="btn btn-success">
+                                        <img src="../../../assets/Spinner.gif" *ngIf="(isLoading)"  alt="company logo">
+                                    <mat-icon *ngIf="!(isLoading)">add</mat-icon>Approve and Send To HR
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+               
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

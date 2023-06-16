@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        .body {
+            border: 1px solid #000;
+            font-size: 15px;
+            font-family: 'Time New Romance';
+            
+        }
+
+        .row {
+            width: 100%;
+            display: block;
+            overflow: auto;
+            
+        }
+
+        .rLeft,
+        .rRight {
+            width: 49%;
+            float: left;
+           padding-left: 10px;
+        }
+
+        .rLeft1,
+        .rRight1,
+        .rCenter {
+            width: 30%;
+            float: left;
+            margin-top: 5px;
+            padding-left: 10px;
+        }
+
+        hr {
+            border-color: black;
+        }
+        th{
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <th>
+            <div class="body">
+                <div class="body">
+                    <div class="row" style="background-color: #b9bfbf;">
+                        <span>EMPLOYEE'S INFORMATION</span>
+                    </div>
+                </div>
+        
+                <div class="body">
+                    <div class="row">
+                        <div class="rLeft1">Employee Full Name:</div>
+                        <div class="rCenter">Job Title:</div>
+                        <div class="rRight1">Performance period: (from-to):</div>
+                    </div>
+                    <div class="row">
+                        <div class="rLeft1"><u>@Name</u></div>
+                        <div class="rCenter"><u>@JobTitle</u></div>
+                        <div class="rRight1"><u>@Performance</u></div>
+                    </div>
+                    <div class="row">
+                        <div class="rLeft1">Immediate Supervisor Name:</div>
+                        <div class="rCenter">Immediate Supervisor Job Title:</div>
+        
+                    </div>
+                    <div class="row">
+                        <div class="rLeft1"><u>@SupervisorName</u></div>
+                        <div class="rCenter"><u>@SupervisorJobTitle</u></div>
+                    </div>
+                    <div class="row">
+                        <div class="rLeft1">Location/Branch:</div>
+                        <div class="rCenter">Department:</div>
+                        <div class="rRight1">Division:</div>
+                    </div>
+                    <div class="row">
+                        <div class="rLeft1"><u>@Location</u></div>
+                        <div class="rCenter"><u>@Department</u></div>
+                        <div class="rRight1"><u>@Division</u></div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row" style="background-color: #b9bfbf;">
+                        <span>TOTAL JOB PERFORMANCE RATINGS AND APPROVALS</span>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row">
+        
+                        <div class="rLeft1">
+                            <span><b>Initial Rating by Immediate Supervisor</b></span>
+                            <ul>
+                                <li>Total Performance (Highest EXP (4) to lowest UP (1))
+                                    <ul>
+                                        <li>Performance Objectives (out of 70%),</li>
+                                        <li>Leadership Competencies (20%) and </li>
+                                        <li>Core Values (out of 10%):</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="rCenter"></div>
+                        <div class="rRight1">
+                            <span><b>1st Level Rating</b></span>
+                            <br />
+                            <span><u>@FirstRating</u></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row">
+                        <span class="rLeft"><b>Initial Signoff by Employee</b></span>
+                        <br />
+                        <div class="rLeft">
+        
+                            <span>Position: </span><span><u>@JobTitle</u></span>
+                        </div>
+                        <br />
+                        <div class="rLeft1">
+                            <span>Name: </span><span><u>@Name</u></span>
+                        </div>
+                        <div class="rCenter">
+                            <span>Signature: </span>
+                        </div>
+                        <div class="rRight1">
+                            <span>Date: </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row">
+                        <span class="rLeft"><b>Initial Signoff by 1st Level Supervisor.</b></span>
+                        <br />
+                        <div class="rLeft">
+                            <span>Position: </span><span><u>@SupervisorJobTitle</u></span>
+                        </div>
+                        <br />
+                        <div class="rLeft1">
+                            <span>Name: </span><span><u>@SupervisorName</u></span>
+                        </div>
+                        <div class="rCenter">
+                            <span>Signature: </span>
+                        </div>
+                        <div class="rRight1">
+                            <span>Date: </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row">
+        
+                        <div class="rLeft1">
+                            <span>FINAL Rating by 2nd Level Supervisor. </span>
+                        </div>
+                        <div class="rCenter"></div>
+                        <div class="rRight1">
+                            <span><b>2nd Level Rating</b></span>
+                            <br />
+                            <span><u>@SecondRating</u></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row">
+                        <div class="row" style="text-align: center;">
+                            <span>REQUIRED APPROVALS:</span>
+                            <br />
+                            <span style="text-align: center;">Signoff by 2nd level Supervisor(Manager/Officer)</span>
+        
+                        </div>
+        
+        
+                        <br />
+                        <div class="rLeft">
+                            <span>Position: </span><span><u>@SecondSupervisorJobTitle</u></span>
+                        </div>
+                        <br />
+                        <div class="rLeft1">
+                            <span>Name: </span><span><u>@SecondSupervisorName</u></span>
+                        </div>
+                        <div class="rCenter">
+                            <span>Signature: </span>
+                        </div>
+                        <div class="rRight1">
+                            <span>Date:</span>
+                        </div>
+                        <div class="row" style="text-align: center;color:red;">
+                            <span ><i>Any performance rating adjustments resulted from the
+                                calibration discussion by SMT/ELT shall be communicated to the individual employee through the
+                                line Chief Officer.</i></span>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row" style="text-align: center; background-color: #b9bfbf ;">
+                        <span style="text-align: center;"><b>For EXP & UP ratings only</b></span>
+                        <br />
+                        <span><i>(When there is a change in performance rating after calibration)</i></span>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="row" style="background-color: #b9bfbf ;">
+                        <div class="rLeft" style="text-align: center;">
+                            <span><b>APA rating</b></span>
+                            
+                            
+                        </div>
+                        <br />
+                        <div class="rLeft1">
+                            <span><i>The approval of staff APA should be three levels for <b>EXP & UP </b>performance with some
+                                exceptions like divisions which are directly reports to the CEO, departments which have no
+                                divisions under it, Chief Officers, D/CEOs, CEO and others as defined from time to
+                                time.</i></span>
+                        </div>
+                        <div class="rCenter"></div>
+        
+                        <div class="rRight1">
+                            <span style="text-align: center;"><b>3rd Level</b></span><br />
+                            <span><u>@ThirdRating</u></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="body" style="background-color: #b9bfbf ;">
+                    <div class="row">
+                        <div class="row" style="text-align: center;">
+                            <span><b>REQUIRED APPROVALS:</b></span><br />
+                            <span>Signoff by Second Level Line Supervisor/Chief Officer</span><br />
+                        </div>
+        
+                        <div class="rLeft">
+                            <span>Position:</span><span><u>@SecondSupervisorJobTitle</u></span>
+                        </div><br />
+                        <div class="rLeft1">
+                            <span>Name:</span><span><u>@SecondSupervisorName</u></span>
+                        </div>
+                        <div class="rCenter">
+                            <span>Signature:</span>
+                        </div>
+                        <div class="rRight1">
+                            <span>Date:</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th>
+    </table>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<div class="row" style="float: right;">
+    <i (click)="DownLoad()" ><mat-icon matTooltip="Download">get_app</mat-icon></i>
+    <i (click)="onClose()"><mat-icon matTooltip="Close">clear</mat-icon></i> 
+</div>
+
+<div id="content" #content>
+    <div class="body" style="margin-top: 30px;">
+        <div style="background-color: #b9bfbf ;">
+            <div class="row">
+                <span class="span">EMPLOYEE'S INFORMATION</span>
+            </div>
+        </div>
+
+        <div >
+            <div class="row">
+                <div class="rLeft1">Employee Full Name:</div>
+                <div class="rCenter">Job Title:</div>
+                <div class="rRight1">Performance period: (from-to):</div>
+            </div>
+            <div class="row">
+                <div class="rLeft1"><u>{{Name}}</u></div>
+                <div class="rCenter"><u>{{Job}}</u></div>
+                <div class="rRight1"><u>{{Period}}</u></div>
+            </div>
+            <div class="row">
+                <div class="rLeft1">Immediate Supervisor Name:</div>
+                <div class="rCenter">Immediate Supervisor Job Title:</div>
+
+            </div>
+            <div class="row">
+                <div class="rLeft1"><u>{{ImmediateSupName}}</u></div>
+                <div class="rCenter"><u>{{ImmediateSupTitle}}</u></div>
+            </div>
+            <div class="row">
+                <div class="rLeft1">Location/Branch:</div>
+                <div class="rCenter">Department:</div>
+                <div class="rRight1">Division:</div>
+            </div>
+            <div class="row">
+                <div class="rLeft1"><u>{{Location}}</u></div>
+                <div class="rCenter"><u>{{Department}}</u></div>
+                <div class="rRight1"><u>{{Division}}</u></div>
+            </div>
+        </div>
+        <div style="background-color: #b9bfbf ;">
+            <div class="row">
+                <span>TOTAL JOB PERFORMANCE RATINGS AND APPROVALS</span>
+            </div>
+        </div>
+        <div class="body">
+            <div class="row">
+
+                <div class="rLeft">
+                    <span class="span"><b>Initial Rating by Immediate Supervisor</b></span>
+                    <ul>
+                        <li>Total Performance (Highest EXP (4) to lowest UP (1))
+                            <ol>
+                                <li>Performance Objectives (out of 70%),</li>
+                                <li>Leadership Competencies (20%) and </li>
+                                <li>Core Values (out of 10%):</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rRight">
+                    <span class="span"><b>1st Level Rating</b></span>
+                    <br />
+                    <span><u>{{FirstRating}}</u></span>
+                </div>
+            </div>
+        </div>
+        <div style="height: 100px;" >
+            <span class="span"><b>Employee Comment:</b></span>
+        </div>
+        <div class="body">
+            <div class="row">
+                
+                <span class="rLeft"><b>Initial Signoff by Employee</b></span>
+                <br />
+                <div class="rLeft">
+
+                    <span>Position: </span><span><u>{{Job}}</u></span>
+                </div>
+                <br />
+                <div class="rLeft1">
+                    <span>Name: </span><span><u>{{Name}}</u></span>
+                </div>
+                <div class="rCenter">
+                    <span>Signature: </span>
+                </div>
+                <div class="rRight1">
+                    <span>Date: </span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="row">
+                <span class="rLeft"><b>Initial Signoff by 1st Level Supervisor.</b></span>
+                <br />
+                <div class="rLeft">
+                    <span>Position: </span><span><u>{{ImmediateSupTitle}}</u></span>
+                </div>
+                <br />
+                <div class="rLeft1">
+                    <span>Name: </span><span><u>{{ImmediateSupName}}</u></span>
+                </div>
+                <div class="rCenter">
+                    <span>Signature: </span>
+                </div>
+                <div class="rRight1">
+                    <span>Date: </span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="row">
+
+                <div class="rLeft">
+                    <span>FINAL Rating by 2nd Level Supervisor. </span>
+                </div>
+                <div class="rRight">
+                    <span class="span"><b>2nd Level Rating</b></span>
+                    <br />
+                    <span><u>{{SecondRating}}</u></span>
+                </div>
+            </div>
+        </div>
+        <div >
+            <div class="row" style="text-align: center;">
+                
+                    <span class="span">REQUIRED APPROVALS:</span>
+                    <br />
+                    <span class="span">Signoff by 2nd level Supervisor(Manager/Officer)</span>
+
+               
+            </div>
+            <div class="row">
+                <div class="rLeft">
+                    <span>Position:</span><span> <u>{{SecondSupervisorJobTitle}}</u> </span>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="rLeft1">
+                    <span>Name: </span><span><u>{{SecondSupervisorName}}</u></span>
+                </div>
+                <div class="rCenter">
+                    <span>Signature: </span>
+                </div>
+                <div class="rRight1">
+                    <span>Date:</span>
+                </div>
+            </div>
+
+            <div class="row" style="text-align: center; color:red;margin-right: 10px">
+                <span ><i >Any performance rating adjustments resulted from the
+                        calibration discussion by SMT/ELT shall be communicated to the individual employee
+                        through the line Chief Officer.</i></span>
+
+
+            </div>
+
+
+        </div>
+        <div class="body">
+            <span class="span"><b>Disclaimer:</b></span> 
+                <br>
+                <span style="margin-right: 10px;">By signing this one-pager performance appraisal summary, I agree to be bound by the electronic rating and<br/> 
+                    digital records of my performance review that resulted in this final rating made by my second line Supervisor.</span>
+                    <br/>
+        </div>
+        <div class="body" style="background-color: #b9bfbf ;text-align: center;">
+            <div class="row">
+                <span><b>For EXP & UP ratings only</b></span>
+                <br />
+                <span><i>(When there is a change in performance rating after calibration)</i></span>
+            </div>
+
+
+        </div>
+        <div  style="background-color: #b9bfbf ;">
+            <div class="row" style="text-align: center;">
+
+                <span class="span"><b>APA rating</b></span>
+
+
+            </div>
+            <div class=" row">
+                <div class="rLeft">
+                    <span><i>The approval of staff APA should be three levels for <b>EXP & UP </b>performance with some
+                            exceptions like divisions which are directly reports to the CEO, departments which have no
+                            divisions under it, Chief Officers, D/CEOs, CEO and others as defined from time to
+                            time.</i></span>
+                </div>
+
+                <div class="rRight">
+                    <span class="span" style="text-align: center;"><b>3rd Level</b></span><br />
+                    <span><u>{{ThirdRating}}</u></span>
+                </div>
+            </div>
+        </div>
+        <div class="body" style="background-color: #b9bfbf ;">
+            <div class="row" style="text-align: center;">
+                
+                    <span class="span"><b>REQUIRED APPROVALS:</b></span><br />
+                    <span>Signoff by Second Level Line Supervisor/Chief Officer</span><br />
+                
+                
+            </div>
+            <div class="row">
+                <div class="rLeft">
+
+                    <span>Position:</span><span><u>{{SecondSupervisorJobTitle}}</u></span>
+                </div><br />
+                <div class="rLeft1">
+                    <span>Name:</span><span><u>{{SecondSupervisorName}}</u></span>
+                </div>
+                <div class="rCenter" >
+                    <span>Signature:</span>
+                </div>
+                <div class="rRight1">
+                    <span>Date:</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

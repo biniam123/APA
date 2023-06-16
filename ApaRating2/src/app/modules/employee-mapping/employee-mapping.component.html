@@ -1,0 +1,122 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Employee Mapping</div>
+    <div class="page_content shadow p-3 position-relative">
+
+        <div class="mat-elevation-z8">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Supervisor Name</mat-label>
+                        <input matInput [(ngModel)]="supervisor" placeholder="Search..." />
+
+                        <button mat-button matSuffix mat-icon-button aria-label="search" *ngIf="supervisor"
+                            (click)="supervisory()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <table mat-table [dataSource]="superList">
+                        <ng-container matColumnDef="Name">
+                            <th mat-header-cell *matHeaderCellDef>Name<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element">{{element.Name}}<span
+                                    style="padding-left: 20px;"></span>
+                            </td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef>Select</th>
+                            <td mat-cell *matCellDef="let element">
+                                <i (click)="SelectSuper(element.Guid,element.Name)">
+                                    <mat-icon>swap_horiz</mat-icon>
+                                </i>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Employee Name</mat-label>
+                        <input matInput [(ngModel)]="employee" placeholder="Search..." />
+
+                        <button mat-button matSuffix mat-icon-button aria-label="search" *ngIf="employee"
+                            (click)="employeeSearch()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <table mat-table [dataSource]="empList">
+                        <ng-container matColumnDef="Name">
+                            <th mat-header-cell *matHeaderCellDef>Name<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element">{{element.Name}}<span
+                                    style="padding-left: 20px;"></span>
+                            </td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef>Select</th>
+                            <td mat-cell *matCellDef="let element">
+                                <i (click)="SelectEmp(element.Guid,element.Name)">
+                                    <mat-icon>swap_horiz</mat-icon>
+                                </i>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <table mat-table [dataSource]="mapList">
+                        <ng-container matColumnDef="SupervisorName">
+                            <th mat-header-cell *matHeaderCellDef>Supervisor Name<span
+                                    style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element">{{element.SupervisorName}}<span
+                                    style="padding-left: 20px;"></span>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="EmployeeName">
+                            <th mat-header-cell *matHeaderCellDef>Employee Name<span style="padding-left: 20px;"></span>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.EmployeeName}}<span
+                                    style="padding-left: 20px;"></span>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="disColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: disColumns;"></tr>
+                    </table>
+                    <button mat-button matSuffix mat-icon-button aria-label="search" (click)="SaveMapping()">
+                            <mat-icon matTooltip="Map Employee">add</mat-icon> Map
+                        </button>
+                </div>
+            </div>
+            <table mat-table [dataSource]="mappedList">
+                <ng-container matColumnDef="SupervisorName">
+                    <th mat-header-cell *matHeaderCellDef>Supervisor Name<span
+                            style="padding-left: 20px;"></span></th>
+                    <td mat-cell *matCellDef="let element">{{element.SupervisorName}}<span
+                            style="padding-left: 20px;"></span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="EmployeeName">
+                    <th mat-header-cell *matHeaderCellDef>Employee Name<span style="padding-left: 20px;"></span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.EmployeeName}}<span
+                            style="padding-left: 20px;"></span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                
+                    <td mat-cell *matCellDef="let element">
+                        <i (click)="Delete(element.Id)">
+                            <mat-icon matTooltip="Delete">delete_forever</mat-icon>
+                            
+                        </i>
+                    </td>
+                    
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="disColumn"></tr>
+                <tr mat-row *matRowDef="let row; columns: disColumn"></tr>
+            </table>
+        </div>
+
+    </div>
+</div>

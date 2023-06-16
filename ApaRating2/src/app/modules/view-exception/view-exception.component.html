@@ -1,0 +1,87 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">View Employee Exceptional Objective</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="mat-elevation-z8">
+            <div class="card">
+                <div class="card-header clearfix">
+                    <span class="pull-left" style="color:#6CC417">{{Name}}</span>
+                    
+                    <div class="pull-right">
+                        <button class="btn btn-danger btn-sm">
+                            <i (click)="exportToWord()">Export to PDF</i> </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="pull-left">
+                                Exceptional Performance across all objectives
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table mat-table [dataSource]="objectiveData" class="table table-bordered">
+                                    <ng-container matColumnDef="No" style="text-align: center;">
+                                        <th  mat-header-cell *matHeaderCellDef>No</th>
+                                        <td class="cell" mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Objective">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Objective</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Objective}}</td>
+                                    </ng-container>
+                                      
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="pull-left">How they have met the criteria for an Exceptional/Outstanding rating?</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table mat-table [dataSource]="criateriaData" class="table table-bordered">
+                                    <ng-container matColumnDef="CoreValue" style="text-align: center;">
+                                        <th  mat-header-cell *matHeaderCellDef>Demonstration of the Exchange’s Core Values</th>
+                                        <td class="cell" mat-cell *matCellDef="let element"> {{element.CoreValue}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Dedication">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Dedication and commitment</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Dedication}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Adherence">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Adherence to rules and regulations</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Adherence}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Shouldering">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Shouldering Additional responsibilities</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Shouldering}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Skill">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Interpersonal skills and behaviour</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Skill}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Innovative">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Innovative practices/process/system introduced</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Innovative}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Share">
+                                        <th  mat-header-cell *matHeaderCellDef style="text-align: center;">Efforts made to share & transfer knowledge</th>
+                                        <td class="cell" mat-cell *matCellDef="let element" >{{element.Share}}</td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

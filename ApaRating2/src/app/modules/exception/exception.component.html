@@ -1,0 +1,157 @@
+<div class="card">
+    <div class="card-header">
+        <span class="pull-left">For Employees that are Rated Exceptional</span>
+        <mat-icon id="close-icon" class="pull-right" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="card-body">
+        <div class="mat-elevation-z8">
+            <span>1. Exceptional Performance across all objectives</span>
+
+            <form [formGroup]="addObjective" class="example-form" (ngSubmit)="SaveObjective()">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-12">
+                            <mat-form-field appearance="fill" >
+                                <mat-label>Objective/Task:</mat-label>
+                                <textarea matInput required placeholder="Insert Objective"
+                                    formControlName="Objective"></textarea>
+        
+                                <mat-error>Objective required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                            <button style="margin-top: 5px;background-color: #ffc221;" mat-raised-button type="submit"
+                                class="btn btn-success" >
+                                <mat-icon>add</mat-icon>Objective
+                            </button>
+                        </div>
+                        <div class="col-md-12">
+                            <table mat-table [dataSource]="objectiveData">
+                                    <ng-container matColumnDef="No">
+                                        <th mat-header-cell *matHeaderCellDef><Span>No</Span></th>
+                                        <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                            </span>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Objective">
+                                        <th mat-header-cell *matHeaderCellDef>Objective</th>
+                                        <td mat-cell *matCellDef="let element">{{element.Objective}}</td>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="delete">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                
+                                        <td mat-cell *matCellDef="let element">
+                                            <i (click)="Delete(element.Id)">
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </i>
+                                        </td>
+                
+                                    </ng-container>
+                                    <ng-container matColumnDef="edit">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <i (click)="Update(element.Id)">
+                                                <mat-icon>edit</mat-icon>
+                                            </i>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <table mat-table [dataSource]="allObjectiveData">
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef><Span>No</Span></th>
+                                <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                    </span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Objective">
+                                <th mat-header-cell *matHeaderCellDef>Objective</th>
+                                <td mat-cell *matCellDef="let element">{{element.Objective}}</td>
+                            </ng-container>
+        
+                            
+                            <tr mat-header-row *matHeaderRowDef="displayedAllColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedAllColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+
+            </form>
+
+            
+        </div>
+        <div class="mat-elevation-z8">
+            <span>2. How they have met the criteria for an Exceptional/Outstanding rating? </span>
+            <form [formGroup]="addCriateria" class="example-form" (ngSubmit)="SaveCriateria()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.1. Demonstration of the Exchange’s Core Values: </mat-label>
+                            <textarea matInput formControlName="CoreValue"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.5. Interpersonal skills and behaviour: </mat-label>
+                            <textarea matInput formControlName="Skill"></textarea>
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.2. Dedication and commitment: </mat-label>
+                            <textarea matInput formControlName="Dedication"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.6. Innovative practices/process/system introduced: </mat-label>
+                            <textarea matInput formControlName="Innovative"></textarea>
+                        </mat-form-field>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.3. Adherence to rules and regulations: </mat-label>
+                            <textarea matInput formControlName="Adherence"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.7. Efforts made to share & transfer knowledge: </mat-label>
+                            <textarea matInput formControlName="Share"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>2.4. Shouldering Additional responsibilities: </mat-label>
+                            <textarea matInput formControlName="Shouldering"></textarea>
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+                
+                <button style="margin-top: 5px;background-color: #ffc221;" mat-raised-button type="submit"
+                    class="btn btn-success" [mat-dialog-close]="true">
+                    <mat-icon>add</mat-icon>Send
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,27 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2" style="text-align: center;">
+        <h2 >Ethiopia Commodity Exchange</h2>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="page_content-data position-absolute text-center">
+            <mat-card fxFlex="100"  >
+                <mat-toolbar style="background-color: #6CC417;">Login Page</mat-toolbar>
+                <form fxLayoutAlign="streach" fxLayout="column" class="example-form" [formGroup]="login"
+                    (ngSubmit)="Login()" >
+                    <mat-form-field class="example-full-width">
+                        <input matInput required placeholder="Username.." formControlName="Username">
+                        <mat-error>Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput required type="password" placeholder="Password.." formControlName="Password">
+                        <mat-error>Required</mat-error>
+                    </mat-form-field>
+                    <button style="background-color: #ffc221;" mat-raised-button type="submit" class="btn btn-warning">Login</button>
+                    <br/>
+                    <br/>
+                    <span>{{errorMessage}}</span>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<mat-nav-list>
+    <div class="logo">
+        <img src="assets/ECXLogo.png" alt="company logo" />
+    </div>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="./dashboard" routerLinkActive="list-item-active">
+        <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    
+    <a mat-list-item routerLink="./search" routerLinkActive="list-item-active">
+        <mat-icon>add_circle</mat-icon>Record APA
+    </a>
+    <a mat-list-item routerLink="./plan" routerLinkActive="list-item-active">
+        <mat-icon>add</mat-icon>Record Annual Plan
+    </a>
+    <a mat-list-item routerLink="./myapa" *ngIf="(Final==true)" routerLinkActive="list-item-active">
+        <mat-icon>search</mat-icon> View My APA
+    </a>
+    
+    <a mat-list-item routerLink="./reviewapa" *ngIf="(FirstLine==true)" routerLinkActive="list-item-active" >
+        <mat-icon>supervised_user_circle</mat-icon>First Line Review APA
+    </a>
+    <a mat-list-item routerLink="./supervisory" routerLinkActive="list-item-active" *ngIf="(SecondLine==true)">
+        <mat-icon>supervised_user_circle</mat-icon>Second Line Review APA
+    </a>
+    <a mat-list-item routerLink="./final" routerLinkActive="list-item-active" *ngIf="(ThirdLine==true)">
+        <mat-icon>rate_review</mat-icon>Final Review APA
+    </a>
+    <a mat-list-item routerLink="./summary" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>bar_chart</mat-icon> Summary
+    </a>
+    <a mat-list-item routerLink="./status" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>bar_chart</mat-icon> Status
+    </a>
+    <a mat-list-item routerLink="./detail" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>bar_chart</mat-icon> Detail APA View
+    </a>
+    <a mat-list-item routerLink="./single" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>bar_chart</mat-icon> Single Page APA 
+    </a>
+    <a mat-list-item routerLink="./apaStatus" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>add</mat-icon> Expected APA 
+    </a>
+    <a mat-list-item routerLink="./viewPlan" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>rate_review</mat-icon> View Annual Plan 
+    </a>
+    <a mat-list-item routerLink="./expectedPlan" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>rate_review</mat-icon> Add Expected Plan 
+    </a>
+    <a mat-list-item routerLink="./mapping" routerLinkActive="list-item-active" *ngIf="(HR==true)">
+        <mat-icon>rate_review</mat-icon> Employee Mapping 
+    </a>
+</mat-nav-list>

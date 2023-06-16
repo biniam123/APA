@@ -1,0 +1,88 @@
+#content{
+    width: 500px;
+    margin-left: 50px;
+}
+
+.body {
+    border: 1px solid #000;
+    font-size: 8px!important;
+    font-family: 'Time New Romance';
+    width: 500px;
+    
+}
+
+.row {
+    width: 500px;
+    display: block;
+    overflow: auto;
+    line-height: 1.8;
+    margin-left: 5px;
+    font-size: 8px!important;
+    font-family: 'Time New Romance';
+}
+
+.rLeft{
+    width: 350px;
+    float: left;
+    font-size: 8px!important;
+    font-family: 'Time New Romance';
+}
+.rRight {
+    width: 100px;
+    float: left;
+    font-size: 8px!important;
+    font-family: 'Time New Romance';
+}
+
+.rLeft1,
+.rCenter,
+.rRight1 {
+    width: 160px;
+    float: left;
+    font-size: 8px!important;
+    font-family: 'Time New Romance';
+}
+
+hr {
+    border-color: black;
+}
+th{
+    text-align: left;
+}
+ul{margin-bottom: 0px;}
+span{
+    font-size: 9px!important;
+    font-family: 'Time New Romance';
+}
+.span{
+    text-decoration: underline;
+   text-underline-offset: 2px;
+   font-size: 8px!important;
+    font-family: 'Time New Romance';
+}
+
+  tr.mat-header-row {
+    font-size: 8px!important;
+    margin: 0px !important;
+}
+
+  tr.mat-row, tr.mat-footer-row {
+    font-size: 8px!important;
+}
+.cell{
+  padding-top: 10px!important;
+  padding-left: 20px!important;
+  font-size: 8px!important;
+}
+  th{background: #73a534;
+  color: white;}
+  th.mat-header-cell {
+    font-size: 8px;
+    font-weight: bold;
+    background-color: #ffc221!important;
+    text-align: center!important;
+}
+td.mat-cell {
+    font-size: 8px!important;
+    
+  }

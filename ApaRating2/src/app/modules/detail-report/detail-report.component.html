@@ -1,0 +1,316 @@
+<div class="container-fluid page">
+    <div class="page_box p-3 mt-2">Detail APA Report</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="mat-elevation-z8">
+            <div class="row">
+                <div class="col-md-6">
+                    <form [formGroup]="search">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Performance Period range</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate required formControlName="start" placeholder="Start date">
+                                <input matEndDate required formControlName="end" placeholder="End date">
+                                </mat-date-range-input>
+                                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                                <mat-error>required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 search-div">
+                            <mat-form-field class="search-form-field" floatLabel="never" style="padding-bottom: 0px;">
+                                <input matInput formControlName="searchKey" placeholder="Search...">
+                                <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKeyValue"
+                                    (click)="onSearchClear()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+            
+            
+                            </mat-form-field>
+                            <button (click)="onSearch()" mat-stroked-button tabindex="-1" class="search-button" >
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <table mat-table [dataSource]="employeeList">
+                        <ng-container matColumnDef="No">
+                            <th mat-header-cell *matHeaderCellDef>No</th>
+                            <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                </span></td>
+                        </ng-container>
+                        <ng-container matColumnDef="Name">
+                            <th mat-header-cell *matHeaderCellDef>Name<span style="padding-left: 20px;"></span></th>
+                            <td mat-cell *matCellDef="let element">{{element.EmployeeName}}<span style="padding-left: 20px;"></span></td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="exception">
+                            <th mat-header-cell *matHeaderCellDef>EXP Rated</th>
+                            <td mat-cell *matCellDef="let element" style="padding-left: 30px;">
+                                <a *ngIf="(element.SecondLevelRate==4)" [routerLink]="['/viewException', element.EmployeeId, element.PerformancePeriod]">
+                                        
+                                    <mat-icon matTooltip="Exceptional Objective">done_outline</mat-icon>
+                                
+                            </a>
+                            </td>
+                        </ng-container>
+                        <ng-container style="width: 100px;" matColumnDef="Print">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <i (click)="PopulateObjective(element.EmployeeId, element.EmployeeName, element.PerformancePeriod)">
+                                    <mat-icon>touch_app</mat-icon>
+                                </i>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+            </div>    
+        </div>
+        <div class="mat-elevation-z8">
+            <div class="mat-elevation-z8" style="padding-bottom: 30px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="pull-left">SECTION 1: Employee Profile </span>
+                        <i class="pull-right" (click)="openDialog()"><mat-icon>print</mat-icon></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table mat-table [dataSource]="employeeData" class="table table-bordered">
+                                <tr>
+                                    <ng-container matColumnDef="Name">
+                                        <th mat-header-cell *matHeaderCellDef>Employee Name <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.EmployeeName}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Job">
+                                        <th mat-header-cell *matHeaderCellDef>Job Title <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.JobTitle}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Period">
+                                        <th mat-header-cell *matHeaderCellDef>Performance Period <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.PerformancePeriod}}</td>
+                                    </ng-container>
+                                    
+                                </tr>
+                                <tr>
+                                    <ng-container matColumnDef="SupervisorName">
+                                        <th mat-header-cell *matHeaderCellDef>Immediate Supervisor Name <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.FirstLevelSupervisor}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="SupervisorJob">
+                                        <th mat-header-cell *matHeaderCellDef>Immediate Supervisor Job Title <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.FirstLineJobTitle}}</td>
+                                    </ng-container>
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    <ng-container matColumnDef="Location">
+                                        <th mat-header-cell *matHeaderCellDef>Location <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.Location}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Department">
+                                        <th mat-header-cell *matHeaderCellDef>Department <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.Department}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Division">
+                                        <th mat-header-cell *matHeaderCellDef>Division <span style="padding-left: 20px;"></span></th>
+                                        <td mat-cell *matCellDef="let element">{{element.Division}}</td>
+                                    </ng-container>
+                                    
+                                    
+                                </tr>
+                                <tr mat-header-row *matHeaderRowDef="displayEmployee"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayEmployee;"></tr>
+            
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="mat-elevation-z8" style="padding-bottom: 30px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="pull-left">SECTION 2: SUPERVISOR EVALUATION ON PERFORMANCE OBJECTIVES </span>
+                        <span class="pull-right">{{objective}}</span>
+                    </div>
+                    <div class="card-body">
+                        <table mat-table [dataSource]="objectiveData">
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef>No</th>
+                                <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                    </span></td>
+                            </ng-container>
+                            <ng-container matColumnDef="Objective">
+                                <th mat-header-cell *matHeaderCellDef>Objective <span style="padding-left: 20px;"></span>
+                                </th>
+                                <td mat-cell *matCellDef="let element">{{element.Objective}}<span style="padding-left: 20px;">
+                                    </span></td>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="Rating">
+                                <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;">
+                                    </span>SUPERVISOR EVALUATIONS
+                                </th>
+                                <td mat-cell style="text-align: center;" *matCellDef="let element">
+                                    {{element.Code}}</td>
+        
+                            </ng-container>
+        
+                            <tr mat-header-row *matHeaderRowDef="displayObjective"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayObjective;"></tr>
+        
+                        </table>        
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8" *ngIf="!(isSupervisor)" style="padding-bottom: 30px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="pull-left">SECTION 3: EVALUATION ON TECHNICAL COMPETENCIES</span>
+                        <span class="pull-right">{{nonsupervisory}}</span>
+                    </div>
+                    <div class="card-body">
+                        <table mat-table [dataSource]="noncompetencyData">
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef>No</th>
+                                <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                    </span></td>
+                            </ng-container>
+                            <ng-container matColumnDef="Competency">
+                                <th mat-header-cell *matHeaderCellDef>COMPETENCY</th>
+                                <td mat-cell *matCellDef="let element">{{element.CompetencyName}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+        
+                                <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;">
+                                    </span>SUPERVISOR EVALUATIONS
+                                </th>
+                                <td mat-cell style="text-align: center;" *matCellDef="let element">
+                                    {{element.Code}}</td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedNonColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedNonColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8" *ngIf="(isSupervisor)" style="padding-bottom: 30px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="pull-left">SECTION 3: EVALUATION ON LEADERSHIP and MANAGEMENT COMPETENCIES</span>
+                        <span class="pull-right">{{supervisory}}</span>
+                    </div>
+                    <div class="card-body">
+                        <table mat-table [dataSource]="supercompetencyData">
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef>No</th>
+                                <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                    </span></td>
+                            </ng-container>
+                            <ng-container matColumnDef="Competency">
+                                <th mat-header-cell *matHeaderCellDef>COMPETENCY</th>
+                                <td mat-cell *matCellDef="let element">{{element.CompetencyName}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+        
+                                <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;">
+                                    </span>SUPERVISOR EVALUATIONS
+                                </th>
+                                <td mat-cell style="text-align: center;" *matCellDef="let element">
+                                    {{element.Code}}</td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedSuperColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedSuperColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-elevation-z8" style="padding-bottom: 30px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="pull-left">SECTION 4: EVALUATION ON ECX CORE VALUES (lowest UP=1point to Highest EXP=4 points)</span>
+                        <span class="pull-right">{{core}}</span>
+                    </div>
+                    <div class="card-body">
+                        <table mat-table [dataSource]="coreData">
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef>No</th>
+                                <td mat-cell *matCellDef="let element;let i = index"> {{i+1}}<span style="padding-left: 20px;">
+                                    </span></td>
+                            </ng-container>
+                            <ng-container matColumnDef="Core">
+                                <th mat-header-cell *matHeaderCellDef>CORE VALUES</th>
+                                <td mat-cell *matCellDef="let element">{{element.CoreValue}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Self-Rating">
+                                <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;"> </span>SELF
+                                    EVALUATION</th>
+                                <td mat-cell style="text-align: center;" *matCellDef="let element">
+                                    {{element.SelfEvaluation}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+                                <th mat-header-cell *matHeaderCellDef><span style="padding-left: 15px;"> </span>SUPERVISOR
+                                    EVALUATION</th>
+                                <td mat-cell style="text-align: center;" *matCellDef="let element">
+                                    {{element.Code}}</td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayCore"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayCore;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card mat-elevation-z8" style="padding-bottom: 30px;">
+                <div class="card-header">
+                    <div class="row">
+                        <span class="col-md-4">Employee Comment</span>
+                        <span class="col-md-4">1st Line Supervisor’s Comment</span>
+                        <span class="col-md-4"> 2nd Line Supervisor Comment </span>
+                    </div>
+                    
+                </div>
+
+                <div class="card-body" style="margin-top: 20px; font-size: 20px; font-weight: bold;">
+                    <div class="row">
+                        
+                            <span class="col-md-4">{{EmployeeComment}}</span>
+                            <span class="col-md-4">{{FirstLineComment}}</span>
+                            <span class="col-md-4">{{SecondLineComment}}</span>
+                            
+                        
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="card mat-elevation-z8" style="padding-bottom: 30px;">
+                <div class="card-header">
+                    <div class="row">
+                        <span class="col-md-8">SECTION 6: Ratings</span>
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="card-body" >
+                    <div class="row">
+                        <span class="col-md-4" >First Line Rating: <span style="color: red;">{{FirstLevelRate}}</span>   </span>
+                        <span class="col-md-4">Second Line Rating: <span style="color: red;">{{SecondLevelRate}}</span> </span>
+                        <span class="col-md-4">Third Line Rating: <span style="color: red;">{{ThirdLevelRate}}</span> </span>
+                    </div>
+                    
+                
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
